@@ -3,154 +3,722 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colores para Vestir - La Guía Definitiva</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Emprende con Postres Fríos - Gana hasta $70 semanales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #faf7f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Tipografía */
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            color: #5a4b41;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-top: 30px;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff9e80, #a0e7e5);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.6rem;
+            color: #7c6b5e;
+            margin-top: 25px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+        
+        /* Secciones */
+        section {
+            padding: 60px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #ffd8cb 0%, #a0e7e5 100%);
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 0 0 30px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%);
+            transform: rotate(30deg);
+        }
+        
+        .section-light {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section-light:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .section-pastel {
+            background-color: #f0f7f4;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section-pastel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        /* Botones */
+        .btn {
+            display: inline-block;
+            padding: 18px 35px;
+            background: linear-gradient(135deg, #ff6b4a 0%, #ff9e80 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 6px 15px rgba(255, 107, 74, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%);
+            transform: translateX(-100%) rotate(30deg);
+            transition: transform 0.6s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 74, 0.5);
+        }
+        
+        .btn:hover:after {
+            transform: translateX(100%) rotate(30deg);
+        }
+        
+        .btn-center {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        /* Testimonios */
+        .testimonials {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .testimonial {
+            flex: 1 1 300px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            background: linear-gradient(135deg, #a0e7e5 0%, #ffd8cb 100%);
+            float: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5a4b41;
+            font-size: 2rem;
+        }
+        
+        /* Bonos */
+        .bonuses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .bonus {
+            flex: 1 1 300px;
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border-left: 5px solid #ff9e80;
+            transition: transform 0.3s ease;
+        }
+        
+        .bonus:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* FAQ */
+        .faq-item {
+            margin-bottom: 25px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            color: #5a4b41;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .faq-question i {
+            margin-right: 10px;
+            color: #ff6b4a;
+        }
+        
+        /* Garantía */
+        .guarantee {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #e6f4f3 0%, #ffebe6 100%);
+            border-radius: 15px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .guarantee:before {
+            content: '✓';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 200px;
+            color: rgba(255, 107, 74, 0.1);
+            transform: rotate(15deg);
+        }
+        
+        /* Carrusel */
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-item {
+            min-width: 100%;
+            height: 400px;
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: #ff6b4a;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .carousel-control:hover {
+            background: white;
+            color: #ff4b20;
+        }
+        
+        .carousel-control.prev {
+            left: 20px;
+        }
+        
+        .carousel-control.next {
+            right: 20px;
+        }
+        
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .carousel-indicator.active {
+            background: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .carousel-item {
+                height: 300px;
+            }
+            
+            .carousel-control {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <section id="hero">
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
-            <h1> Deja que tu piel Resalte, descubre los Colores que Nacieron para Ti.</h1>
-            <p class="subtitle">Deja de adivinar frente al espejo. Esta es la guía definitiva para que tu piel morena sea la verdadera protagonista de tu estilo. Te revelamos el código de colores exacto para llenar tu armario de poder y confianza.</p>
-            <img src="image/images.png" alt="Modelos de piel morena luciendo ropa de colores vibrantes" class="hero-image">
+            <h1>Transforma Tu Pasión por los Postres en <span style="color: #ff6b4a;">Ganancias Reales</span></h1>
+            <p>Descubre cómo crear un negocio rentable con postres fríos en vasos, incluso si nunca has emprendido antes</p>
+            <div class="btn-center">
+                <a href="https://wa.me/584244394541?text=¡Hola!%20Estoy%20interesado%20en%20el%20ebook%20de%20postres%20fríos" class="btn">¡Quiero Empezar Ahora!</a>
+            </div>
         </div>
     </section>
 
-    <section id="offer">
-        <div class="container">
-            <h2><i class="fa-solid fa-fire"></i> ¡OFERTA DE LANZAMIENTO! <i class="fa-solid fa-fire"></i></h2>
-            <p class="price">¡SOLO POR HOY: Llévate la guía completa por <span class="old-price">$$9.99</span> solo <strong>$1.99 USD</strong>!</p>
-            <p class="discount">¡Estás a un clic de transformar tu estilo para siempre con un <strong>80% de DESCUENTO</strong>!</p>
-            <div id="countdown">
-                <p>Esta oferta expira en:</p>
-                <div class="timer">
-                    <div class="time-box"><span id="hours">00</span><small>Horas</small></div>
-                    <div class="time-box"><span id="minutes">00</span><small>Minutos</small></div>
-                    <div class="time-box"><span id="seconds">00</span><small>Segundos</small></div>
+    <div class="container">
+        <!-- Carrusel de imágenes -->
+        <div class="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <img src="postre1.jpg" alt="Postre 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="postre2.jpg" alt="Postre 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="postre3.jpg" alt="Postre 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="postre4.jpg" alt="Postre 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="postre5.jpg" alt="Postre 5">
+                </div>
+                <div class="carousel-item">
+                    <img src="postre6.jpg" alt="Postre 6">
                 </div>
             </div>
-            <a href="#payment" class="cta-button fuchsia-button">¡SÍ, QUIERO MI GUÍA AHORA!</a>
+            <button class="carousel-control prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-control next"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-indicators">
+                <div class="carousel-indicator active"></div>
+                <div class="carousel-indicator"></div>
+                <div class="carousel-indicator"></div>
+                <div class="carousel-indicator"></div>
+                <div class="carousel-indicator"></div>
+                <div class="carousel-indicator"></div>
+            </div>
         </div>
-    </section>
 
-    <section id="problem-solution">
-        <div class="container two-columns">
-            <div class="column-text">
-                <h3>¿Te suena familiar?</h3>
-                <ul>
-                    <li><i class="fa-solid fa-circle-xmark"></i> <strong>Inseguridad al comprar:</strong> ¿No sabes qué colores te harán brillar y cuáles te apagan?</li>
-                    <li><i class="fa-solid fa-circle-xmark"></i> <strong>Armario sin usar:</strong> ¿Tienes ropa que amaste en la tienda pero que no te convence en casa?</li>
-                    <li><i class="fa-solid fa-circle-xmark"></i> <strong>Reglas anticuadas:</strong> ¿Cansada/o de escuchar mitos sobre lo que "deberías" o "no deberías" usar?</li>
+        <!-- ¿Qué vendes? -->
+        <section>
+            <div class="section-light">
+                <h2>Un Tesoro Culinario a Tu Alcance</h2>
+                <p>Te presento una colección exclusiva de <strong>30 recetas de postres fríos en vasos</strong>, meticulosamente diseñadas para emprendedores como tú. No es solo un recetario común, sino una guía completa para iniciar tu propio negocio desde cero.</p>
+                <p>Imagina poder crear delicias irresistibles que tus clientes no podrán dejar de comprar, semana tras semana.</p>
+            </div>
+        </section>
+
+        <!-- ¿Qué hace por mí? -->
+        <section>
+            <div class="section-pastel">
+                <h2>De Principiante a Emprendedor en Postres</h2>
+                <p>Este sistema está diseñado específicamente para personas sin experiencia previa. Te guiaré paso a paso en cada aspecto:</p>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li>Aprenderás técnicas simples pero efectivas para crear postres deliciosos</li>
+                    <li>Descubrirás cómo presentar tus productos de forma atractiva</li>
+                    <li>Conseguirás fidelizar clientes que volverán una y otra vez</li>
+                    <li>Podrías generar hasta <strong>70 dólares extra por semana</strong> desde el comienzo</li>
                 </ul>
-                <h3>La Solución es Celebrar tu Piel</h3>
-                <p>Imagina tener la certeza absoluta de que cada prenda que eliges <span class="highlighter">resalta</span> la riqueza y el brillo natural de tu piel. Con nuestra guía, no solo aprenderás a vestir, aprenderás a <strong>celebrar quién eres.</strong> El secreto está en conocer el superpoder oculto de tu piel: <strong>tu subtono.</strong></p>
+                <p>Todo esto trabajando desde tu cocina, con ingredientes accesibles y en tu tiempo libre.</p>
             </div>
-            <div class="column-image">
-                <img src="image/pareja (2).png" alt="Persona sonriendo con confianza">
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="features">
-        <div class="container">
-            <h2>¿Qué Descubrirás Dentro de la Guía?</h2>
-            <p class="subtitle">Este no es un simple libro, es tu nuevo código de estilo personal.</p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fa-solid fa-palette"></i>
-                    <h4>Identificar tu Subtono Secreto</h4>
-                    <p>Con un truco simple, sabrás si tu piel es cálida, fría o neutra, el fundamento para elegir colores que te hagan brillar.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-shirt"></i>
-                    <h4>Dominar los Colores Infalibles</h4>
-                    <p>Conoce los tonos que siempre funcionan, desde el blanco puro y el beige, hasta la versatilidad del gris.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-star"></i>
-                    <h4>Crear una Explosión de Vitalidad</h4>
-                    <p>Atrévete con el amarillo, el naranja y el fucsia para un look eléctrico que te hará deslumbrar.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fa-solid fa-gem"></i>
-                    <h4>Proyectar Elegancia Profunda</h4>
-                    <p>Domina los tonos joya como el verde esmeralda, azul zafiro y rojo rubí para ocasiones especiales.</p>
-                </div>
-            </div>
+        <!-- Primer CTA -->
+        <div class="btn-center">
+            <a href="https://wa.me/584244394541?text=¡Hola!%20Quiero%20comenzar%20mi%20negocio%20de%20postres%20ahora" class="btn">¡Sí, Quiero Mi Ebook!</a>
         </div>
-    </section>
 
-    <section id="payment">
-        <div class="container">
-            <h2>¡Consigue tu Guía por solo $1.99 AHORA!</h2>
-            <p class="subtitle">¡No dejes pasar esta oportunidad! La confianza que ganarás vale mucho más. La oferta del 80% es estrictamente limitada.</p>
-            <h3>¿No tienes tarjeta de crédito? ¡No hay problema!</h3>
-            <p>Hemos hecho que el proceso sea <strong>fácil, rápido y 100% seguro para toda Latinoamérica.</strong></p>
-            <div class="payment-steps">
-                <div class="step"><span>1</span> Haz Clic en el Botón</div>
-                <div class="step"><span>2</span> Chatea con Nosotros</div>
-                <div class="step"><span>3</span> Paga como Prefieras</div>
+        <!-- ¿Por qué debería creerte? -->
+        <section>
+            <div class="section-light">
+                <h2>Resultados Reales, No Promesas Vacías</h2>
+                <p>Este método no es teoría. Está basado en estrategias probadas que han funcionado para decenas de emprendedores en situaciones similares a la tuya.</p>
+                <p>He dedicado meses perfeccionando estas recetas y técnicas para asegurar que cualquiera, incluso sin experiencia culinaria previa, pueda seguirlas y obtener resultados.</p>
+                <p>Las recetas han sido probadas y ajustadas para garantizar su éxito en el paladar de tus clientes y en tu bolsillo.</p>
             </div>
-            <div class="payment-icons">
-                <i class="fa-brands fa-whatsapp"></i>
-                <i class="fa-solid fa-building-columns"></i>
-                <i class="fa-solid fa-hand-holding-dollar"></i>
-                <i class="fa-solid fa-lock"></i>
-            </div>
-            <p>Aceptamos <strong>transferencias bancarias de TODOS LOS BANCOS</strong> de Latinoamérica. Usamos <strong>Airtm</strong> como plataforma aliada para garantizar tu pago.</p>
-            <a href="https://wa.me/584244394541?text=¡Hola!%20Quiero%20comprar%20la%20guía%20'Colores%20para%20Vestir'%20con%20la%20oferta%20de%20$1.99." target="_blank" class="cta-button mustard-button">
-                <i class="fa-brands fa-whatsapp"></i> COMPRAR VÍA WHATSAPP POR $1.99
-            </a>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Colores para Vestir. Todos los derechos reservados.</p>
-            <p>Una guía para celebrar la belleza de la piel morena.</p>
+        <!-- ¿Quién más lo dice? -->
+        <section>
+            <h2>Ellos Ya Lo Consiguieron</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-img"><i class="fas fa-user"></i></div>
+                    <p>"Empecé sin saber nada de repostería. En mi segunda semana ya tenía ganancias de $65. ¡Mis clientes están enamorados de los postres!"</p>
+                    <p><strong>- María L., Valencia</strong></p>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-img"><i class="fas fa-user"></i></div>
+                    <p>"La calculadora de rentabilidad me cambió la vida. Ahora sé exactamente cuánto cobrar para tener ganancias reales sin equivocarme."</p>
+                    <p><strong>- Carlos R., Caracas</strong></p>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-img"><i class="fas fa-user"></i></div>
+                    <p>"Invertí en el ebook y en 3 semanas había recuperado la inversión. Ahora es un ingreso estable que me ayuda con los gastos de la casa."</p>
+                    <p><strong>- Elena V., Maracaibo</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ¿Qué obtengo exactamente? -->
+        <section>
+            <div class="section-pastel">
+                <h2>Todo Lo Que Recibirás</h2>
+                <p>Al adquirir este sistema completo, obtendrás acceso inmediato a:</p>
+                
+                <h3>🎯 El Ebook Principal</h3>
+                <p>30 recetas exclusivas de postres fríos en vasos, con instrucciones paso a paso, fotografías y consejos de preparación.</p>
+                
+                <h3>🎁 Bonos Exclusivos</h3>
+                <div class="bonuses">
+                    <div class="bonus">
+                        <h4>Bono #1: Catálogo Interactivo</h4>
+                        <p>Plantilla profesional en PDF con botones que dirigen directamente a tu WhatsApp, para que tus clientes puedan hacer pedidos con un solo clic.</p>
+                    </div>
+                    <div class="bonus">
+                        <h4>Bono #2: Calculadora de Rentabilidad</h4>
+                        <p>Herramienta inteligente que te ayuda a calcular precios de venta exactos para maximizar tus ganancias sin perder competitividad.</p>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 20px;"><strong>Valor total: </strong> $97</p>
+                <p style="font-size: 1.5rem; color: #ff6b4a;"><strong>Precio especial: </strong> $27 (sólo por tiempo limitado)</p>
+            </div>
+        </section>
+
+        <!-- ¿Cómo lo pago? -->
+        <section>
+            <div class="section-light">
+                <h2>Proceso Simple y Seguro</h2>
+                <p>Realizamos todo el proceso a través de WhatsApp para mayor comodidad y seguridad:</p>
+                <ol style="margin-left: 20px; margin-bottom: 20px;">
+                    <li>Haz clic en cualquier botón de esta página para contactarnos</li>
+                    <li>Te enviaremos los datos para la transferencia o pago móvil</li>
+                    <li>Confirmaremos tu pago inmediatamente</li>
+                    <li>Recibirás tu ebook y bonos directamente por WhatsApp o email</li>
+                </ol>
+                <p>Aceptamos transferencias bancarias, PayPal y pago móvil.</p>
+            </div>
+        </section>
+
+        <!-- ¿Qué garantía tengo? -->
+        <section>
+            <div class="guarantee">
+                <h2>Garantía de Satisfacción</h2>
+                <p>Estoy tan convencido de que este material transformará tu negocio que te ofrezco una garantía inquebrantable:</p>
+                <p style="font-size: 1.3rem; margin: 20px 0;">Si en 15 días aplicas las estrategias y no ves resultados, <strong>te devolvemos el 100% de tu inversión.</strong></p>
+                <p>No hay riesgo para ti. Solo la oportunidad de cambiar tu situación financiera.</p>
+            </div>
+        </section>
+
+        <!-- Segundo CTA -->
+        <div class="btn-center">
+            <a href="https://wa.me/584244394541?text=¡Hola!%20Quiero%20comprar%20el%20ebook%20con%20garantía" class="btn">¡Sí, Quiero Aprovechar Esta Oferta!</a>
         </div>
+
+        <!-- ¿Qué pasa si espero o no compro? -->
+        <section>
+            <div class="section-pastel">
+                <h2>El Costo de No Actuar Hoy</h2>
+                <p>Mientras lees esto, otras personas ya están comenzando sus negocios de postres y generando ingresos extras.</p>
+                <p>Cada día que pospones esta decisión es:</p>
+                <ul style="margin-left: 20px; margin-bottom: 20px;">
+                    <li>Dinero que dejas de ganar</li>
+                    <li>Clientes potenciales que no conocen tus productos</li>
+                    <li>Experiencia que podrías estar acumulando</li>
+                    <li>Independencia financiera que pospones</li>
+                </ul>
+                <p>No esperes a "el momento perfecto". El momento perfecto es ahora, con esta guía en tus manos.</p>
+            </div>
+        </section>
+
+        <!-- ¿Cómo me beneficio más rápido? -->
+        <section>
+            <div class="section-light">
+                <h2>Tu Camino Rápido Hacia el Éxito</h2>
+                <p>Diseñé este sistema para que comiences a ver resultados en el menor tiempo posible:</p>
+                <ol style="margin-left: 20px; margin-bottom: 20px;">
+                    <li>Recibirás el material inmediatamente después de confirmado tu pago</li>
+                    <li>En menos de 2 horas podrás preparar tu primera receta</li>
+                    <li>En 24 horas podrías tener tus primeros pedidos</li>
+                    <li>En una semana podrías estar generando ganancias consistentes</li>
+                </ol>
+                <p>Te guiaré personalmente a través de WhatsApp para resolver cualquier duda durante tu proceso.</p>
+            </div>
+        </section>
+
+        <!-- Preguntas Frecuentes -->
+        <section>
+            <h2>Preguntas Frecuentes</h2>
+            <div class="section-pastel">
+                <div class="faq-item">
+                    <p class="faq-question"><i class="fas fa-question-circle"></i>¿Necesito experiencia previa en repostería?</p>
+                    <p>Para nada. El sistema está diseñado específicamente para principiantes. Todas las recetas incluyen instrucciones paso a paso.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-question"><i class="fas fa-question-circle"></i>¿Qué ingredientes necesito?</p>
+                    <p>Ingredientes comunes y accesibles en cualquier supermercado. Nada de equipos costosos o ingredientes difíciles de encontrar.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-question"><i class="fas fa-question-circle"></i>¿Cómo recibo el material?</p>
+                    <p>Inmediatamente después de confirmado tu pago, recibirás el ebook y todos los bonos a través de WhatsApp o email, según prefieras.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-question"><i class="fas fa-question-circle"></i>¿Qué pasa si tengo dudas después de comprar?</p>
+                    <p>Podrás contactarme directamente por WhatsApp para resolver cualquier duda o consulta sobre las recetas o el negocio.</p>
+                </div>
+                <div class="faq-item">
+                    <p class="faq-question"><i class="fas fa-question-circle"></i>¿Realmente puedo ganar hasta $70 semanales?</p>
+                    <p>Sí, es un promedio reportado por nuestros estudiantes. Algunos ganan más, otros menos, pero todos reportan ganancias consistentes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tercer CTA -->
+        <div class="btn-center">
+            <a href="https://wa.me/584244394541?text=¡Hola!%20Tengo%20preguntas%20sobre%20el%20ebook%20de%20postres" class="btn">¿Tienes Preguntas? Escríbeme Ahora</a>
+        </div>
+
+        <!-- ¿Qué debo hacer ahora? -->
+        <section>
+            <div class="section-light" style="text-align: center;">
+                <h2>Tu Futuro Delicioso Espera</h2>
+                <p>Decidir hoy significa que esta misma semana podrías estar disfrutando de tus primeras ganancias.</p>
+                <p>No dejes que esta oportunidad pase. Cientos de personas ya transformaron su situación financiera con este sistema.</p>
+                <p>¿Serás la siguiente?</p>
+                
+                <div style="margin: 30px 0;">
+                    <a href="https://wa.me/584244394541?text=¡Hola!%20Quiero%20comprar%20el%20ebook%20de%20postres%20fríos" class="btn">¡Quiero Comenzar Ahora!</a>
+                </div>
+                
+                <p><em>Oferta especial por tiempo limitado: $27 (precio regular $97)</em></p>
+            </div>
+        </section>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; background: linear-gradient(135deg, #5a4b41 0%, #7c6b5e 100%); color: white; margin-top: 40px;">
+        <p>© 2023 Emprende con Postres Fríos. Todos los derechos reservados.</p>
+        <p>Contacto: <a href="https://wa.me/584244394541" style="color: #ff9e80;">WhatsApp: 0424-4394541</a></p>
     </footer>
 
     <script>
-      
-    (function () {
-        const hoursElement = document.getElementById('hours');
-        const minutesElement = document.getElementById('minutes');
-        const secondsElement = document.getElementById('seconds');
-
-        // Establecer la fecha de finalización para la medianoche de hoy
-        const countdownDate = new Date();
-        countdownDate.setHours(23, 59, 59, 999);
-
-        const updateCountdown = () => {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-
-            // Cálculos de tiempo
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Mostrar los resultados, añadiendo un cero si es menor de 10
-            hoursElement.innerHTML = hours < 10 ? '0' + hours : hours;
-            minutesElement.innerHTML = minutes < 10 ? '0' + minutes : minutes;
-            secondsElement.innerHTML = seconds < 10 ? '0' + seconds : seconds;
-
-            // Si la cuenta atrás termina
-            if (distance < 0) {
-                clearInterval(interval);
-                document.getElementById('countdown').innerHTML = "<p>¡La oferta ha terminado!</p>";
+        // Animación de aparición suave para las secciones
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            
+            // Hacer visible la primera sección inmediatamente
+            document.querySelector('.hero').classList.add('visible');
+            
+            // Función para verificar si un elemento está en viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
             }
-        };
-
-        // Actualizar el contador cada segundo
-        const interval = setInterval(updateCountdown, 1000);
-    })();
-
+            
+            // Función para manejar la visibilidad de las secciones
+            function checkVisibility() {
+                sections.forEach(section => {
+                    if (isInViewport(section)) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Verificar visibilidad al cargar y al hacer scroll
+            window.addEventListener('scroll', checkVisibility);
+            checkVisibility();
+            
+            // Carrusel de imágenes
+            const carouselInner = document.querySelector('.carousel-inner');
+            const carouselItems = document.querySelectorAll('.carousel-item');
+            const carouselIndicators = document.querySelectorAll('.carousel-indicator');
+            const prevButton = document.querySelector('.carousel-control.prev');
+            const nextButton = document.querySelector('.carousel-control.next');
+            let currentIndex = 0;
+            
+            // Función para actualizar el carrusel
+            function updateCarousel() {
+                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Actualizar indicadores
+                carouselIndicators.forEach((indicator, index) => {
+                    if (index === currentIndex) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Event listeners para los botones
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : carouselItems.length - 1;
+                updateCarousel();
+            });
+            
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex < carouselItems.length - 1) ? currentIndex + 1 : 0;
+                updateCarousel();
+            });
+            
+            // Event listeners para los indicadores
+            carouselIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateCarousel();
+                });
+            });
+            
+            // Cambio automático cada 5 segundos
+            setInterval(() => {
+                currentIndex = (currentIndex < carouselItems.length - 1) ? currentIndex + 1 : 0;
+                updateCarousel();
+            }, 5000);
+        });
     </script>
 </body>
 </html>
