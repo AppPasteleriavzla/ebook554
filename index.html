@@ -213,6 +213,15 @@
             display: none; /* Oculto hasta hacer clic */
             margin-top: 20px;
         }
+        
+        #qr-code a {
+            color: var(--color-primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+        #qr-code a:hover {
+            text-decoration: underline;
+        }
 
         #qr-code img {
             max-width: 80%;
@@ -236,10 +245,12 @@
     <h1>Asistente de Repostería</h1>
     <div id="chat-container">
         <div id="chat-window">
+            
             <div class="chat-message bot">
-                <p>¡Hola! Soy <strong>MarquesaBot</strong>, tu asistente experto en repostería.</p>
-                <p>Estoy aquí para ayudarte a descubrir el delicioso mundo de los postres y cómo puedes iniciar tu propio negocio con nuestra <strong>Guía de 30 Recetas de Postres Fríos</strong>. ¿En qué puedo ayudarte hoy?</p>
+                <p>¡Hola! Soy <strong>MarquesaBot</strong>, tu asistente de repostería. ¡Estoy encantada de saludarte!</p>
+                <p>Para empezar, ¿cómo te llamas?</p>
             </div>
+            
         </div>
         <form id="chat-form">
             <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." required>
@@ -254,14 +265,15 @@
             <p>El precio de la guía es de **35 BOB**.</p>
             <div class="modal-buttons">
                 <button id="qr-button">1. Pagar con QR (Simple) 📱</button>
-                <a href="https://wa.me/591XXXXXXXX" target="_blank" id="creator-button">
-                    2. Hablar con el Creador 👤
+                <a href="https://wa.me/584128939324" target="_blank" id="creator-button">
+                    2. Pagar vía WhatsApp 👤
                 </a>
             </div>
             <div id="qr-code">
                 <p>Escanea este código QR con tu app de banco para pagar **35 BOB**.</p>
-                <img src="httpsT_URL_DE_TU_IMAGEN_QR.png" alt="Código QR de Pago">
-                <p>Una vez realizado el pago, envía tu comprobante al creador por WhatsApp para recibir tu guía.</p>
+                
+                <img src="https://i.ibb.co/4RC1fvGF/IMG-20251104-WA0001.jpg" alt="Código QR de Pago Yape Bolivia">
+                <p>Una vez realizado el pago, <a href="https://wa.me/584128939324" target="_blank">envía tu comprobante al creador por WhatsApp</a> para recibir tu guía.</p>
             </div>
         </div>
     </div>
@@ -289,7 +301,7 @@
         // Saludo inicial del bot (ya está en el HTML)
         chatHistory.push({
             role: 'assistant',
-            content: '¡Hola! Soy MarquesaBot...' 
+            content: '¡Hola! Soy MarquesaBot, tu asistente de repostería. ¡Estoy encantada de saludarte!\n\nPara empezar, ¿cómo te llamas?'
         });
 
         // Manejar envío del formulario
@@ -394,7 +406,7 @@
         // Clic fuera del modal para cerrar
         paymentModal.addEventListener('click', (e) => {
             if (e.target === paymentModal) {
-                paymentModal.style.display = 'none';
+                paymentModal.style.distance = 'none';
             }
         });
 
