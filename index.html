@@ -270,6 +270,9 @@
         // --- CONFIGURACIÓN ---
         // ¡IMPORTANTE! Reemplaza esto con la URL de tu función de Supabase
         const SUPABASE_FUNCTION_URL = 'https://lzflauyqlenzmbjjapau.supabase.co/functions/v1/asistente-ventas';
+        
+        // --- ¡¡CORRECCIÓN 1: AÑADIR LA CLAVE ANON!! ---
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6ZmxhdXlxbGVuem1iamphcGF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0NzkyODAsImV4cCI6MjA3ODA1NTI4MH0.9D57DTEmSTUBBkYm9BWGV0yYQgQ6zX89y4iVIYSo7zk';
         // --- FIN CONFIGURACIÓN ---
 
         const chatWindow = document.getElementById('chat-window');
@@ -310,6 +313,8 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                        // --- ¡¡CORRECCIÓN 2: AÑADIR EL ENCABEZADO DE AUTORIZACIÓN!! ---
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
                     },
                     body: JSON.stringify({ history: chatHistory }),
                 });
