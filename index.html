@@ -15,6 +15,7 @@
             --color-notification: #4CAF50;
         }
         
+        /* --- CSS CORREGIDO --- */
         body {
             font-family: var(--font-main);
             background-color: var(--color-bg);
@@ -22,32 +23,35 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 10px;
+            height: 100vh; /* Cambiado de min-height y quitado el padding/centrado */
             box-sizing: border-box;
             position: relative;
         }
 
+        /* --- CSS CORREGIDO --- */
         h1 {
             font-family: var(--font-elegant);
             font-weight: 500;
             color: var(--color-primary);
             text-align: center;
-            margin-bottom: 15px;
+            margin: 0; /* Quitado margen inferior */
+            padding: 15px 10px; /* Añadido padding */
+            background-color: var(--color-bot); /* Añadido un fondo para que parezca un header */
+            border-bottom: 1px solid #e0e0e0;
         }
 
+        /* --- CSS CORREGIDO --- */
         #chat-container {
             width: 100%;
-            max-width: 95vw; /* Más ancho en móviles */
-            height: 70vh; /* Mayor altura en móviles */
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            /* max-width: 95vw; <- REMOVIDO */
+            /* height: 70vh; <- REMOVIDO */
+            /* border: 1px solid #e0e0e0; <- REMOVIDO */
+            /* border-radius: 12px; <- REMOVIDO */
+            /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); <- REMOVIDO */
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            flex-grow: 1; /* AÑADIDO: Esto hace que el chat llene el espacio restante */
         }
 
         #chat-window {
@@ -347,12 +351,12 @@
             line-height: 1;
         }
 
+        /* --- CSS CORREGIDO --- */
         /* Media queries para pantallas más grandes */
         @media (min-width: 768px) {
-            #chat-container {
-                max-width: 700px;
-                height: 65vh;
-            }
+            /* * La regla que limitaba el #chat-container fue REMOVIDA
+             * para mantener la app a pantalla completa.
+             */
             
             .chat-message {
                 max-width: 70%;
@@ -376,7 +380,6 @@
                 <p>Para empezar, ¿cómo te llamas?</p>
             </div>
             
-            <!-- Carrusel de imágenes de postres -->
             <div class="chat-message bot">
                 <p>Estos son algunos de los deliciosos postres que podrás preparar con nuestra guía:</p>
                 <div class="carousel-container">
@@ -428,10 +431,8 @@
         </form>
     </div>
 
-    <!-- Contenedor para notificaciones de compra -->
     <div id="purchase-notifications"></div>
 
-    <!-- Modal de Pago -->
     <div id="payment-modal">
         <div class="modal-content">
             <span id="close-modal">&times;</span>
@@ -485,7 +486,7 @@
             { name: "Roberto", lastName: "Martínez" },
             { name: "Carmen", lastName: "Vargas" },
             { name: "Miguel Ángel", lastName: "Suárez" },
-            { name: "Patricia", lastName: "Rojas" },
+            { name: "Patricia", lastName:D: "Rojas" },
             { name: "Fernando", lastName: "Castillo" },
             { name: "Gabriela", lastName: "Torres" },
             { name: "Alejandro", lastName: "Flores" },
