@@ -3,551 +3,417 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asistente de Repostería</title>
+    <title>MarquesaBot - Tu Asistente de Repostería</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        :root {
-            --font-elegant: 'Georgia', 'Times New Roman', Times, serif;
-            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            --color-text: #333;
-            --color-bg: #ffffff;
-            --color-primary: #8a4b3c; /* Un tono marrón repostería elegante */
-            --color-bot: #f1f1f1;
-            --color-notification: #4CAF50;
-        }
-        
         body {
-            font-family: var(--font-main);
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 10px;
-            box-sizing: border-box;
-            position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7fafc;
         }
-
-        h1 {
-            font-family: var(--font-elegant);
-            font-weight: 500;
-            color: var(--color-primary);
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        #chat-container {
-            width: 100%;
-            max-width: 95vw; /* Más ancho en móviles */
-            height: 70vh; /* Mayor altura en móviles */
-            border: 1px solid #e0e0e0;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        .chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            background-color: #ffffff;
         }
-
-        #chat-window {
-            flex-grow: 1;
-            padding: 15px;
+        .header {
+            background-color: #a78bfa; /* Un morado suave */
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .messages {
+            padding: 1rem;
+            min-height: 400px;
+            max-height: 60vh; /* Ajusta la altura máxima para que sea responsive */
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 0.75rem;
+            background-color: #edf2f7;
         }
-
-        .chat-message {
-            padding: 12px 18px;
-            border-radius: 18px;
-            line-height: 1.6;
-            max-width: 85%; /* Más ancho en móviles */
-            word-wrap: break-word;
-        }
-
-        .chat-message.user {
-            background-color: var(--color-primary);
-            color: white;
-            border-bottom-right-radius: 4px;
+        .user-message {
+            background-color: #bfdbfe; /* Azul claro para el usuario */
+            color: #1a202c;
             align-self: flex-end;
+            padding: 0.6rem 1rem;
+            border-radius: 15px 15px 0 15px;
+            max-width: 75%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-
-        .chat-message.bot {
-            background-color: var(--color-bot);
-            color: var(--color-text);
-            border-bottom-left-radius: 4px;
+        .bot-message {
+            background-color: #ffffff; /* Blanco para el bot */
+            color: #2d3748;
             align-self: flex-start;
-            font-family: var(--font-elegant); /* Fuente elegante para el bot */
+            padding: 0.6rem 1rem;
+            border-radius: 15px 15px 15px 0;
+            max-width: 75%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
-
-        /* Estilo para los párrafos y negritas del bot */
-        .chat-message.bot p {
-            margin: 0 0 10px 0;
-        }
-        .chat-message.bot p:last-child {
-            margin-bottom: 0;
-        }
-        .chat-message.bot strong {
-            color: var(--color-primary);
-            font-weight: 700;
-        }
-
-        .typing-indicator {
-            align-self: flex-start;
-            padding: 12px 18px;
-        }
-        .typing-indicator span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #aaa;
-            animation: bounce 1s infinite;
-            margin: 0 2px;
-        }
-        .typing-indicator span:nth-child(2) { animation-delay: 0.1s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.2s; }
-
-        @keyframes bounce {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-4px); }
-        }
-
-        #chat-form {
+        .input-area {
             display: flex;
-            border-top: 1px solid #e0e0e0;
-            padding: 15px;
+            padding: 1rem;
+            border-top: 1px solid #e2e8f0;
+            background-color: #ffffff;
         }
-
-        #chat-input {
+        .input-area input {
             flex-grow: 1;
-            border: 1px solid #ccc;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
             border-radius: 20px;
-            padding: 10px 15px;
-            font-size: 16px;
+            margin-right: 0.5rem;
+            font-size: 1rem;
         }
-
-        #chat-input:focus {
-            outline: none;
-            border-color: var(--color-primary);
-        }
-
-        #send-button {
-            background-color: var(--color-primary);
+        .input-area button {
+            background-color: #a78bfa; /* Morado del header */
             color: white;
-            border: none;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            margin-left: 10px;
-            cursor: pointer;
-            font-size: 20px;
+            padding: 0.75rem 1.25rem;
+            border-radius: 20px;
+            font-weight: bold;
             transition: background-color 0.2s;
         }
-        #send-button:hover {
-            background-color: #6a3a2e;
+        .input-area button:hover {
+            background-color: #8b5cf6; /* Un morado más oscuro al pasar el ratón */
         }
 
-        /* --- Notificaciones de Compra --- */
-        #purchase-notifications {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 50;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-            max-width: 300px;
+        /* --- Estilos para el Carrusel de Imágenes --- */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px; /* Ancho máximo para el carrusel */
+            margin: 0 auto 1.5rem auto; /* Centrado y espacio inferior */
+            overflow: hidden;
+            border-radius: 15px; /* Bordes redondeados */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            background-color: #fff;
+            padding: 10px; /* Espacio interno para que las imágenes no toquen el borde */
+        }
+        .carousel-image {
+            width: 100%;
+            display: block; /* Asegura que la imagen ocupe todo el ancho */
+            border-radius: 10px; /* Bordes redondeados para cada imagen */
+            transition: opacity 1s ease-in-out; /* Transición suave de opacidad */
+            position: absolute; /* Para superponer las imágenes */
+            top: 10px;
+            left: 10px;
+            opacity: 0; /* Por defecto invisibles */
+            height: 300px; /* Altura fija para todas las imágenes */
+            object-fit: cover; /* Recorta la imagen para que cubra el espacio */
+        }
+        .carousel-image.active {
+            opacity: 1; /* La imagen activa es visible */
         }
 
-        .purchase-notification {
-            background-color: var(--color-notification);
-            color: white;
-            padding: 12px 16px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            font-size: 14px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.3s, transform 0.3s;
-            max-width: 100%;
-            word-wrap: break-word;
-        }
-
-        .purchase-notification.show {
-            opacity: 0.9;
-            transform: translateY(0);
-        }
-
-        .flag-icon {
-            display: inline-block;
-            width: 16px;
-            height: 12px;
-            background: linear-gradient(to bottom, 
-                #D52B1E 33%, 
-                #F9E300 33%, 
-                #F9E300 66%, 
-                #007934 66%);
-            margin-right: 5px;
-            vertical-align: middle;
-            border-radius: 1px;
-        }
-
-        /* --- Modal de Pago --- */
-        #payment-modal {
+        /* Estilos del modal de pago */
+        .payment-modal {
             display: none; /* Oculto por defecto */
             position: fixed;
-            z-index: 100;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            display: flex;
             align-items: center;
             justify-content: center;
         }
-
         .modal-content {
-            background-color: var(--color-bg);
+            background-color: #ffffff;
+            margin: auto;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             width: 90%;
-            max-width: 400px;
+            max-width: 450px;
             text-align: center;
+            position: relative;
         }
-        
-        .modal-content h2 {
-            font-family: var(--font-elegant);
-            color: var(--color-primary);
-            margin-top: 0;
-        }
-
-        .modal-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 25px;
-        }
-        
-        .modal-buttons button, .modal-buttons a {
-            padding: 15px;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            transition: transform 0.2s;
-        }
-
-        .modal-buttons button:hover, .modal-buttons a:hover {
-            transform: scale(1.03);
-        }
-
-        #qr-button {
-            background-color: var(--color-primary);
-            color: white;
-        }
-
-        #creator-button {
-            background-color: #25D366; /* Color WhatsApp */
-            color: white;
-        }
-
-        #qr-code {
-            display: none; /* Oculto hasta hacer clic */
-            margin-top: 20px;
-        }
-        
-        #qr-code a {
-            color: var(--color-primary);
-            font-weight: 600;
-            text-decoration: none;
-        }
-        #qr-code a:hover {
-            text-decoration: underline;
-        }
-
-        #qr-code img {
-            max-width: 80%;
-            border: 1px solid #ccc;
-        }
-        
-        #close-modal {
+        .close-button {
+            color: #aaa;
             position: absolute;
             top: 10px;
-            right: 15px;
-            font-size: 30px;
-            color: #aaa;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
             cursor: pointer;
-            line-height: 1;
         }
-
-        /* Media queries para pantallas más grandes */
-        @media (min-width: 768px) {
-            #chat-container {
-                max-width: 700px;
-                height: 65vh;
-            }
-            
-            .chat-message {
-                max-width: 70%;
-            }
+        .close-button:hover,
+        .close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
         }
-
+        .modal-content h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .payment-option {
+            background-color: #f0f4f8;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .payment-option:hover {
+            background-color: #e6edf3;
+            border-color: #a78bfa;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        .payment-option img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        .payment-option strong {
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 5px;
+        }
+        .payment-option p {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+        .qr-code-container {
+            margin-top: 20px;
+            display: none; /* Oculto por defecto */
+        }
+        .qr-code-container img {
+            max-width: 200px;
+            height: auto;
+            border: 5px solid #a78bfa;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: #fff;
+        }
+        .qr-code-container p {
+            font-size: 1rem;
+            color: #4a5568;
+            margin-top: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
-<body>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
 
-    <h1>Asistente de Repostería</h1>
-    <div id="chat-container">
-        <div id="chat-window">
-            
-            <div class="chat-message bot">
-                <p>¡Hola! Soy <strong>MarquesaBot</strong>, tu asistente de repostería. ¡Estoy encantada de saludarte!</p>
-                <p>Para empezar, ¿cómo te llamas?</p>
-            </div>
-            
+    <div class="chat-container">
+        <div class="header">
+            MarquesaBot
         </div>
-        <form id="chat-form">
-            <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." required>
-            <button type="submit" id="send-button">➤</button>
-        </form>
+        <div class="messages" id="messages">
+            <div id="image-carousel" class="carousel-container">
+                </div>
+            <div class="bot-message">
+                ¡Hola! Soy MarquesaBot, tu asistente personal. Estoy aquí para presentarte la increíble guía "30 Recetas de Postres Fríos en Vasos". Con ella, podrás crear deliciosos postres y quizás iniciar tu propio emprendimiento. ¿Te gustaría saber más?
+            </div>
+        </div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Escribe tu mensaje..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
     </div>
 
-    <!-- Contenedor para notificaciones de compra -->
-    <div id="purchase-notifications"></div>
-
-    <!-- Modal de Pago -->
-    <div id="payment-modal">
+    <div id="paymentModal" class="payment-modal">
         <div class="modal-content">
-            <span id="close-modal">&times;</span>
-            <h2>Elige tu método de pago</h2>
-            <p>El precio de la guía es de **35 BOB**.</p>
-            <div class="modal-buttons">
-                <button id="qr-button">1. Pagar con QR (Simple) 📱</button>
-                <a href="https://wa.me/584128939324" target="_blank" id="creator-button">
-                    2. Pagar vía WhatsApp 👤
-                </a>
+            <span class="close-button" onclick="closePaymentModal()">&times;</span>
+            <h2>¡Es hora de adquirir tu guía!</h2>
+            <p>Selecciona tu método de pago preferido para obtener tu acceso a las 30 Recetas de Postres Fríos en Vasos por solo **35 Bs.**</p>
+
+            <div class="payment-option" onclick="showQrCode('yape')">
+                <img src="https://i.imgur.com/gK20mG1.png" alt="Logo QR Yape/BNB"> <strong>Pagar con QR (Yape Bolivia / BNB)</strong>
+                <p>Escanea el código para completar tu compra.</p>
             </div>
-            <div id="qr-code">
-                <p>Escanea este código QR con tu app de banco para pagar **35 BOB**.</p>
-                
-                <img src="https://i.ibb.co/4RC1fvGF/IMG-20251104-WA0001.jpg" alt="Código QR de Pago Yape Bolivia">
-                <p>Una vez realizado el pago, <a href="https://wa.me/584128939324" target="_blank">envía tu comprobante al creador por WhatsApp</a> para recibir tu guía.</p>
+
+            <div class="payment-option" onclick="payViaWhatsApp()">
+                <img src="https://i.imgur.com/uRj0JmQ.png" alt="Logo WhatsApp">
+                <strong>Pagar por WhatsApp</strong>
+                <p>Te guiaremos para un pago directo y seguro.</p>
+            </div>
+
+            <div class="qr-code-container" id="qrCodeContainer">
+                <img id="qrCodeImage" src="" alt="Código QR de Pago">
+                <p>Escanea este código QR para realizar tu pago de 35 BOB.</p>
+                <p>Una vez pagado, recibirás la guía en tu correo electrónico.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- CONFIGURACIÓN ---
-        // ¡IMPORTANTE! Reemplaza esto con la URL de tu función de Supabase
-        const SUPABASE_FUNCTION_URL = 'https://lzflauyqlenzmbjjapau.supabase.co/functions/v1/asistente-ventas';
-        
-        // --- ¡¡CORRECCIÓN 1: AÑADIR LA CLAVE ANON!! ---
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6ZmxhdXlxbGVuem1iamphcGF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI0NzkyODAsImV4cCI6MjA3ODA1NTI4MH0.9D57DTEmSTUBBkYm9BWGV0yYQgQ6zX89y4iVIYSo7zk';
-        // --- FIN CONFIGURACIÓN ---
-
-        const chatWindow = document.getElementById('chat-window');
-        const chatForm = document.getElementById('chat-form');
-        const chatInput = document.getElementById('chat-input');
-        const paymentModal = document.getElementById('payment-modal');
-        const qrButton = document.getElementById('qr-button');
-        const qrCode = document.getElementById('qr-code');
-        const closeModal = document.getElementById('close-modal');
-        const purchaseNotifications = document.getElementById('purchase-notifications');
-        
-        // Historial del chat para enviar a la IA
+        const API_ENDPOINT = 'https://kpbdtmtj2a6u7w75.supabase.co/functions/v1/asistente-ventas'; // Asegúrate de que esta URL sea correcta
+        const messagesDiv = document.getElementById('messages');
+        const userInput = document.getElementById('user-input');
         let chatHistory = [];
 
-        // Lista de nombres y apellidos bolivianos
-        const bolivianNames = [
-            { name: "Ana María", lastName: "Gutiérrez" },
-            { name: "Carlos", lastName: "Mendoza" },
-            { name: "Lucía", lastName: "Fernández" },
-            { name: "José Luis", lastName: "Pérez" },
-            { name: "María Elena", lastName: "Rodríguez" },
-            { name: "Juan Carlos", lastName: "López" },
-            { name: "Sofia", lastName: "García" },
-            { name: "Roberto", lastName: "Martínez" },
-            { name: "Carmen", lastName: "Vargas" },
-            { name: "Miguel Ángel", lastName: "Suárez" },
-            { name: "Patricia", lastName: "Rojas" },
-            { name: "Fernando", lastName: "Castillo" },
-            { name: "Gabriela", lastName: "Torres" },
-            { name: "Alejandro", lastName: "Flores" },
-            { name: "Isabel", lastName: "Chávez" },
-            { name: "Ricardo", lastName: "Reyes" },
-            { name: "Verónica", lastName: "Cruz" },
-            { name: "Pablo", lastName: "Herrera" },
-            { name: "Laura", lastName: "Morales" },
-            { name: "Diego", lastName: "Silva" }
+        // --- URLs de tus imágenes para el carrusel ---
+        const imageUrls = [
+            "https://i.imgur.com/XtgOBlm.png",
+            "https://i.imgur.com/KUwUtOF.png",
+            "https://i.imgur.com/wJ6J1z5.png",
+            "https://i.imgur.com/Sc5OpA8.png",
+            "https://i.imgur.com/akkjuyY.png",
+            "https://i.imgur.com/5gltyFP.png",
+            "https://i.imgur.com/pMxBfmC.png",
+            "https://i.imgur.com/nP685Eb.png",
+            "https://i.imgur.com/jUt7qZ8.png"
         ];
+        let currentImageIndex = 0;
+        const carouselContainer = document.getElementById('image-carousel');
 
-        // Saludo inicial del bot (ya está en el HTML)
-        chatHistory.push({
-            role: 'assistant',
-            content: '¡Hola! Soy MarquesaBot, tu asistente de repostería. ¡Estoy encantada de saludarte!\n\nPara empezar, ¿cómo te llamas?'
-        });
+        function initializeCarousel() {
+            if (!carouselContainer) return;
 
-        // Iniciar notificaciones de compra
-        startPurchaseNotifications();
+            // Limpiar cualquier contenido anterior y establecer una altura inicial
+            carouselContainer.innerHTML = '';
+            carouselContainer.style.height = '320px'; // Altura del contenedor para evitar saltos
 
-        // Manejar envío del formulario
-        chatForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const userMessage = chatInput.value.trim();
-            if (!userMessage) return;
+            imageUrls.forEach((url, index) => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = `Postre frío ${index + 1}`;
+                img.classList.add('carousel-image');
+                if (index === 0) {
+                    img.classList.add('active'); // La primera imagen es activa al inicio
+                }
+                carouselContainer.appendChild(img);
+            });
 
-            addMessageToChat('user', userMessage);
-            chatInput.value = '';
-            
-            // Añadir al historial
-            chatHistory.push({ role: 'user', content: userMessage });
+            setInterval(nextImage, 5000); // Cambia de imagen cada 5 segundos
+        }
 
-            // Mostrar indicador de "escribiendo"
-            const typingIndicator = showTypingIndicator();
+        function nextImage() {
+            const images = carouselContainer.querySelectorAll('.carousel-image');
+            images[currentImageIndex].classList.remove('active');
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            images[currentImageIndex].classList.add('active');
+        }
+
+        // Llamar a la inicialización del carrusel cuando la página cargue
+        document.addEventListener('DOMContentLoaded', initializeCarousel);
+
+
+        async function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
+
+            appendMessage(message, 'user-message');
+            chatHistory.push({ role: 'user', content: message });
+            userInput.value = '';
 
             try {
-                // Llamar a la función de Supabase
-                const response = await fetch(SUPABASE_FUNCTION_URL, {
+                // Deshabilitar input y botón mientras se espera respuesta
+                userInput.disabled = true;
+                document.querySelector('.input-area button').disabled = true;
+
+                const response = await fetch(API_ENDPOINT, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        // --- ¡¡CORRECCIÓN 2: AÑADIR EL ENCABEZADO DE AUTORIZACIÓN!! ---
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ history: chatHistory }),
+                    body: JSON.stringify({ history: chatHistory })
                 });
 
                 if (!response.ok) {
-                    throw new Error('Error en la respuesta del servidor.');
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Error al comunicarse con el bot.');
                 }
 
                 const data = await response.json();
-                const botReply = data.reply;
+                let botReply = data.reply;
 
-                // Quitar indicador de "escribiendo"
-                typingIndicator.remove();
-                
-                // Añadir respuesta del bot al historial
-                chatHistory.push({ role: 'assistant', content: botReply });
-
-                // Comprobar si hay que disparar el pago
+                // --- Lógica para el [TRIGGER_PAGO] ---
                 if (botReply.includes('[TRIGGER_PAGO]')) {
-                    const cleanReply = botReply.replace('[TRIGGER_PAGO]', '').trim();
-                    addMessageToChat('bot', cleanReply);
-                    showPaymentModal();
+                    botReply = botReply.replace('[TRIGGER_PAGO]', '').trim(); // Eliminar el trigger del mensaje visible
+                    if (botReply) { // Si queda algo de texto después del trigger, mostrarlo
+                        appendMessage(botReply, 'bot-message');
+                        chatHistory.push({ role: 'assistant', content: botReply });
+                    }
+                    showPaymentModal(); // Mostrar el modal
                 } else {
-                    addMessageToChat('bot', botReply);
+                    appendMessage(botReply, 'bot-message');
+                    chatHistory.push({ role: 'assistant', content: botReply });
                 }
+                // --- Fin de la lógica para el [TRIGGER_PAGO] ---
 
             } catch (error) {
-                console.error(error);
-                typingIndicator.remove();
-                addMessageToChat('bot', 'Lo siento, algo salió mal. Por favor, intenta de nuevo.');
+                console.error('Error:', error);
+                appendMessage('Lo siento, hubo un error al procesar tu solicitud: ' + error.message, 'bot-message');
+                chatHistory.push({ role: 'assistant', content: 'Error' });
+            } finally {
+                // Volver a habilitar input y botón
+                userInput.disabled = false;
+                document.querySelector('.input-area button').disabled = false;
+                userInput.focus();
+                scrollToBottom();
             }
-        });
+        }
 
-        // Función para añadir mensajes al DOM
-        function addMessageToChat(sender, text) {
+        function appendMessage(text, type) {
             const messageElement = document.createElement('div');
-            messageElement.classList.add('chat-message', sender);
-            
-            // Formateo elegante (respeta párrafos y negritas)
-            let formattedText = text
-                .replace(/(\*\*)(.*?)(\*\*)/g, '<strong>$2</strong>'); // Poner negritas
-            
-            // Convertir saltos de línea en párrafos
-            formattedText = formattedText.split('\n\n').map(p => `<p>${p}</p>`).join('');
-
-            messageElement.innerHTML = formattedText;
-            chatWindow.appendChild(messageElement);
-            chatWindow.scrollTop = chatWindow.scrollHeight; // Auto-scroll
-        }
-        
-        // Mostrar indicador de "escribiendo"
-        function showTypingIndicator() {
-            const typingEl = document.createElement('div');
-            typingEl.classList.add('chat-message', 'bot', 'typing-indicator');
-            typingEl.innerHTML = '<span></span><span></span><span></span>';
-            chatWindow.appendChild(typingEl);
-            chatWindow.scrollTop = chatWindow.scrollHeight;
-            return typingEl;
+            messageElement.classList.add(type);
+            messageElement.innerHTML = text; // Usar innerHTML para interpretar negritas y otros formatos
+            messagesDiv.appendChild(messageElement);
+            scrollToBottom();
         }
 
-        // --- Lógica del Modal de Pago ---
-        
-        function showPaymentModal() {
-            paymentModal.style.display = 'flex';
-            qrCode.style.display = 'none'; // Ocultar QR al inicio
+        function scrollToBottom() {
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
         }
 
-        closeModal.addEventListener('click', () => {
-            paymentModal.style.display = 'none';
-        });
-        
-        qrButton.addEventListener('click', () => {
-            // Mostrar u ocultar el código QR
-            qrCode.style.display = qrCode.style.display === 'none' ? 'block' : 'none';
-        });
-
-        // Clic fuera del modal para cerrar
-        paymentModal.addEventListener('click', (e) => {
-            if (e.target === paymentModal) {
-                paymentModal.style.display = 'none';
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
             }
-        });
-
-        // --- Notificaciones de Compra ---
-        function startPurchaseNotifications() {
-            // Mostrar la primera notificación después de 10 segundos
-            setTimeout(showRandomPurchaseNotification, 10000);
-            
-            // Mostrar notificaciones cada 20-40 segundos
-            setInterval(showRandomPurchaseNotification, Math.random() * 20000 + 20000);
         }
 
-        function showRandomPurchaseNotification() {
-            const randomIndex = Math.floor(Math.random() * bolivianNames.length);
-            const randomPerson = bolivianNames[randomIndex];
-            
-            const notification = document.createElement('div');
-            notification.classList.add('purchase-notification');
-            
-            // Crear icono de bandera de Bolivia
-            const flagIcon = document.createElement('span');
-            flagIcon.classList.add('flag-icon');
-            
-            notification.innerHTML = `
-                ${randomPerson.name} ${randomPerson.lastName} de Bolivia 
-                <span class="flag-icon"></span>
-                ha comprado la Guía de 30 recetas de postres en Vasos.
-            `;
-            
-            purchaseNotifications.appendChild(notification);
-            
-            // Mostrar la notificación
-            setTimeout(() => {
-                notification.classList.add('show');
-            }, 10);
-            
-            // Ocultar y eliminar después de 5 segundos
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => {
-                    if (notification.parentNode) {
-                        notification.parentNode.removeChild(notification);
-                    }
-                }, 300);
-            }, 5000);
+        // --- Funciones del Modal de Pago ---
+        const paymentModal = document.getElementById('paymentModal');
+        const qrCodeContainer = document.getElementById('qrCodeContainer');
+        const qrCodeImage = document.getElementById('qrCodeImage');
+
+        function showPaymentModal() {
+            paymentModal.style.display = 'flex'; // Usar flex para centrar
+            qrCodeContainer.style.display = 'none'; // Ocultar QR al abrir modal
         }
 
+        function closePaymentModal() {
+            paymentModal.style.display = 'none';
+        }
+
+        function showQrCode(type) {
+            // Aquí puedes cambiar la URL del QR dependiendo del 'type' si tienes diferentes QRs
+            // Por ahora, usamos un QR de ejemplo. ¡REEMPLAZA ESTO CON TU QR REAL!
+            const dummyQrUrl = "https://i.ibb.co/4RC1fvGF/IMG-20251104-WA0001.jpg"; 
+            qrCodeImage.src = dummyQrUrl;
+            qrCodeContainer.style.display = 'block';
+        }
+
+        function payViaWhatsApp() {
+            // ¡REEMPLAZA ESTE NÚMERO Y MENSAJE CON LOS TUYOS!
+            const phoneNumber = "584128939324"; // Número de WhatsApp con código de país
+            const message = encodeURIComponent("¡Hola! Quiero comprar la guía '30 Recetas de Postres Fríos en Vasos'.");
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        }
+
+        // Cierra el modal si se hace clic fuera de él
+        window.onclick = function(event) {
+            if (event.target == paymentModal) {
+                closePaymentModal();
+            }
+        }
     </script>
 </body>
 </html>
