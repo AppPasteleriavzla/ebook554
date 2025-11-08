@@ -12,6 +12,7 @@
             --color-bg: #ffffff;
             --color-primary: #8a4b3c; /* Un tono marrón repostería elegante */
             --color-bot: #f1f1f1;
+            --color-notification: #4CAF50;
         }
         
         body {
@@ -26,6 +27,7 @@
             min-height: 100vh;
             padding: 10px;
             box-sizing: border-box;
+            position: relative;
         }
 
         h1 {
@@ -33,11 +35,13 @@
             font-weight: 500;
             color: var(--color-primary);
             text-align: center;
+            margin-bottom: 15px;
         }
 
         #chat-container {
             width: 100%;
-            max-width: 600px;
+            max-width: 95vw; /* Más ancho en móviles */
+            height: 70vh; /* Mayor altura en móviles */
             border: 1px solid #e0e0e0;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -48,9 +52,8 @@
 
         #chat-window {
             flex-grow: 1;
-            padding: 20px;
+            padding: 15px;
             overflow-y: auto;
-            height: 50vh;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -60,7 +63,8 @@
             padding: 12px 18px;
             border-radius: 18px;
             line-height: 1.6;
-            max-width: 80%;
+            max-width: 85%; /* Más ancho en móviles */
+            word-wrap: break-word;
         }
 
         .chat-message.user {
@@ -144,6 +148,52 @@
         }
         #send-button:hover {
             background-color: #6a3a2e;
+        }
+
+        /* --- Notificaciones de Compra --- */
+        #purchase-notifications {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+            max-width: 300px;
+        }
+
+        .purchase-notification {
+            background-color: var(--color-notification);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+        .purchase-notification.show {
+            opacity: 0.9;
+            transform: translateY(0);
+        }
+
+        .flag-icon {
+            display: inline-block;
+            width: 16px;
+            height: 12px;
+            background: linear-gradient(to bottom, 
+                #D52B1E 33%, 
+                #F9E300 33%, 
+                #F9E300 66%, 
+                #007934 66%);
+            margin-right: 5px;
+            vertical-align: middle;
+            border-radius: 1px;
         }
 
         /* --- Modal de Pago --- */
@@ -238,6 +288,18 @@
             line-height: 1;
         }
 
+        /* Media queries para pantallas más grandes */
+        @media (min-width: 768px) {
+            #chat-container {
+                max-width: 700px;
+                height: 65vh;
+            }
+            
+            .chat-message {
+                max-width: 70%;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -258,6 +320,10 @@
         </form>
     </div>
 
+    <!-- Contenedor para notificaciones de compra -->
+    <div id="purchase-notifications"></div>
+
+    <!-- Modal de Pago -->
     <div id="payment-modal">
         <div class="modal-content">
             <span id="close-modal">&times;</span>
@@ -294,15 +360,43 @@
         const qrButton = document.getElementById('qr-button');
         const qrCode = document.getElementById('qr-code');
         const closeModal = document.getElementById('close-modal');
+        const purchaseNotifications = document.getElementById('purchase-notifications');
         
         // Historial del chat para enviar a la IA
         let chatHistory = [];
+
+        // Lista de nombres y apellidos bolivianos
+        const bolivianNames = [
+            { name: "Ana María", lastName: "Gutiérrez" },
+            { name: "Carlos", lastName: "Mendoza" },
+            { name: "Lucía", lastName: "Fernández" },
+            { name: "José Luis", lastName: "Pérez" },
+            { name: "María Elena", lastName: "Rodríguez" },
+            { name: "Juan Carlos", lastName: "López" },
+            { name: "Sofia", lastName: "García" },
+            { name: "Roberto", lastName: "Martínez" },
+            { name: "Carmen", lastName: "Vargas" },
+            { name: "Miguel Ángel", lastName: "Suárez" },
+            { name: "Patricia", lastName: "Rojas" },
+            { name: "Fernando", lastName: "Castillo" },
+            { name: "Gabriela", lastName: "Torres" },
+            { name: "Alejandro", lastName: "Flores" },
+            { name: "Isabel", lastName: "Chávez" },
+            { name: "Ricardo", lastName: "Reyes" },
+            { name: "Verónica", lastName: "Cruz" },
+            { name: "Pablo", lastName: "Herrera" },
+            { name: "Laura", lastName: "Morales" },
+            { name: "Diego", lastName: "Silva" }
+        ];
 
         // Saludo inicial del bot (ya está en el HTML)
         chatHistory.push({
             role: 'assistant',
             content: '¡Hola! Soy MarquesaBot, tu asistente de repostería. ¡Estoy encantada de saludarte!\n\nPara empezar, ¿cómo te llamas?'
         });
+
+        // Iniciar notificaciones de compra
+        startPurchaseNotifications();
 
         // Manejar envío del formulario
         chatForm.addEventListener('submit', async (e) => {
@@ -406,9 +500,53 @@
         // Clic fuera del modal para cerrar
         paymentModal.addEventListener('click', (e) => {
             if (e.target === paymentModal) {
-                paymentModal.style.distance = 'none';
+                paymentModal.style.display = 'none';
             }
         });
+
+        // --- Notificaciones de Compra ---
+        function startPurchaseNotifications() {
+            // Mostrar la primera notificación después de 10 segundos
+            setTimeout(showRandomPurchaseNotification, 10000);
+            
+            // Mostrar notificaciones cada 20-40 segundos
+            setInterval(showRandomPurchaseNotification, Math.random() * 20000 + 20000);
+        }
+
+        function showRandomPurchaseNotification() {
+            const randomIndex = Math.floor(Math.random() * bolivianNames.length);
+            const randomPerson = bolivianNames[randomIndex];
+            
+            const notification = document.createElement('div');
+            notification.classList.add('purchase-notification');
+            
+            // Crear icono de bandera de Bolivia
+            const flagIcon = document.createElement('span');
+            flagIcon.classList.add('flag-icon');
+            
+            notification.innerHTML = `
+                ${randomPerson.name} ${randomPerson.lastName} de Bolivia 
+                <span class="flag-icon"></span>
+                ha comprado la Guía de 30 recetas de postres en Vasos.
+            `;
+            
+            purchaseNotifications.appendChild(notification);
+            
+            // Mostrar la notificación
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Ocultar y eliminar después de 5 segundos
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
 
     </script>
 </body>
